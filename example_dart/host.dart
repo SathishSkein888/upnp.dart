@@ -1,6 +1,6 @@
 import "dart:io";
 
-import "package:upnp/server.dart";
+import "package:skein_upnp/server.dart";
 
 main() async {
   var device = new UpnpHostDevice(

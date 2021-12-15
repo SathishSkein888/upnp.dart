@@ -1,4 +1,4 @@
-import "package:upnp/router.dart";
+import "package:skein_upnp/router.dart";
 
 import "dart:io";
 

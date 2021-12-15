@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:upnp/upnp.dart' as upnp;
+import 'package:upnp/skein_upnp.dart' as upnp;
 import 'package:upnp/router.dart' as router;
 
 void main() {
@@ -133,19 +133,27 @@ class _UpnpDemoState extends State<UpnpDemoPage> {
             FutureBuilder(
                 future: snapshot.requireData.getTotalBytesReceived(),
                 builder: (BuildContext context, AsyncSnapshot<int> data) =>
-                    Text(data.hasData ? 'Bytes Received: ${data.requireData}' : 'Loading...')),
+                    Text(data.hasData
+                        ? 'Bytes Received: ${data.requireData}'
+                        : 'Loading...')),
             FutureBuilder(
                 future: snapshot.requireData.getTotalBytesSent(),
                 builder: (BuildContext context, AsyncSnapshot<int> data) =>
-                    Text(data.hasData ? 'Bytes Sent: ${data.requireData}' : 'Loading...')),
+                    Text(data.hasData
+                        ? 'Bytes Sent: ${data.requireData}'
+                        : 'Loading...')),
             FutureBuilder(
                 future: snapshot.requireData.getTotalPacketsReceived(),
                 builder: (BuildContext context, AsyncSnapshot<int> data) =>
-                    Text(data.hasData ? 'Packets Received: ${data.requireData}' : 'Loading...')),
+                    Text(data.hasData
+                        ? 'Packets Received: ${data.requireData}'
+                        : 'Loading...')),
             FutureBuilder(
                 future: snapshot.requireData.getTotalPacketsSent(),
                 builder: (BuildContext context, AsyncSnapshot<int> data) =>
-                    Text(data.hasData ? 'Packets Sent: ${data.requireData}' : 'Loading...')),
+                    Text(data.hasData
+                        ? 'Packets Sent: ${data.requireData}'
+                        : 'Loading...')),
           ],
         );
       },

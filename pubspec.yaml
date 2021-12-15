@@ -1,7 +1,7 @@
-name: upnp
+name: skein_upnp
 version: 3.0.2
 description: Universal Plugin and Play Host/Client
-homepage: https://github.com/SpinlockLabs/upnp.dart
+homepage: https://github.com/SathishSkein888/upnp.dart.git
 dependencies:
   xml: "^5.3.0"
   crypto: "^3.0.1"

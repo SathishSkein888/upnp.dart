@@ -1,7 +1,7 @@
 import "dart:async";
 
-import "package:upnp/upnp.dart";
-import "package:upnp/src/utils.dart";
+import 'package:skein_upnp/skein_upnp.dart';
+import "package:skein_upnp/src/utils.dart";
 
 Future printDevice(Device device) async {
   void prelude() {
