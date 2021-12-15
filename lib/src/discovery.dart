@@ -208,27 +208,29 @@ class DeviceDiscoverer {
       }
 
       var uuids = clients
-          .where((client) => client.usn.isNotEmpty)
-          .map((client) => client.usn.split("::").first)
+          .where((client) => client.usn!.isNotEmpty)
+          .map((client) => client.usn!.split("::").first)
           .toSet();
       var devices = <DiscoveredDevice>[];
 
       for (var uuid in uuids) {
         var deviceClients = clients.where((client) {
-          return client.usn.isNotEmpty && client.usn.split("::").first == uuid;
+          return client.usn!.isNotEmpty &&
+              client.usn!.split("::").first == uuid;
         }).toList();
         var location = deviceClients.first.location;
-        var serviceTypes = deviceClients.map((it) => it.st).toSet().toList();
-        var device = new DiscoveredDevice(
+        List<String?> serviceTypes =
+            deviceClients.map((it) => it.st).toSet().toList();
+        var device = DiscoveredDevice(
             serviceTypes: serviceTypes, uuid: uuid, location: location);
         if (type == null || serviceTypes.contains(type)) {
           devices.add(device);
         }
       }
 
-      for (var client in clients.where((it) => it.usn.isEmpty)) {
+      for (var client in clients.where((it) => it.usn!.isEmpty)) {
         var device = DiscoveredDevice(
-            serviceTypes: [client.st], uuid: '', location: client.location);
+            serviceTypes: [client.st!], uuid: '', location: client.location);
         if (type == null || device.serviceTypes.contains(type)) {
           devices.add(device);
         }
@@ -263,9 +265,9 @@ class DeviceDiscoverer {
 }
 
 class DiscoveredDevice {
-  final List<String> serviceTypes;
-  final String uuid;
-  final String location;
+  final List<String?> serviceTypes;
+  final String? uuid;
+  final String? location;
 
   DiscoveredDevice(
       {required this.serviceTypes, required this.uuid, required this.location});
@@ -275,7 +277,7 @@ class DiscoveredDevice {
 
     try {
       var request = await UpnpCommon.httpClient
-          .getUrl(Uri.parse(location))
+          .getUrl(Uri.parse(location!))
           .timeout(const Duration(seconds: 5),
               onTimeout:
                   (() => null) as FutureOr<HttpClientRequest> Function()?);
@@ -311,10 +313,10 @@ class DiscoveredDevice {
 }
 
 class DiscoveredClient {
-  String st;
-  String usn;
-  String server;
-  String location;
+  String? st;
+  String? usn;
+  String? server;
+  String? location;
   Map<String, String> headers;
 
   DiscoveredClient(
@@ -344,7 +346,7 @@ class DiscoveredClient {
     Uri uri;
 
     try {
-      uri = Uri.parse(location);
+      uri = Uri.parse(location!);
     } catch (e) {
       throw Exception("ERROR: failed to parse the $location as a uri");
     }

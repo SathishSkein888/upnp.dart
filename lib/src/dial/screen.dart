@@ -1,16 +1,12 @@
 part of upnp.dial;
 
 class DialScreen {
-  static Stream<DialScreen> find({
-    bool silent: true
-  }) async* {
+  static Stream<DialScreen> find({bool silent: true}) async* {
     var discovery = new DeviceDiscoverer();
     var ids = new Set<String?>();
 
     await for (DiscoveredClient client in discovery.quickDiscoverClients(
-      timeout: const Duration(seconds: 5),
-      query: CommonDevices.DIAL
-    )) {
+        timeout: const Duration(seconds: 5), query: CommonDevices.DIAL)) {
       if (ids.contains(client.usn)) {
         continue;
       }
@@ -19,9 +15,7 @@ class DialScreen {
       try {
         var dev = await client.getDevice();
         yield new DialScreen(
-          Uri.parse(Uri.parse(client.location).origin),
-          dev.friendlyName
-        );
+            Uri.parse(Uri.parse(client.location!).origin), dev.friendlyName);
       } catch (e) {
         if (!silent) {
           rethrow;
@@ -63,7 +57,8 @@ class DialScreen {
           out += "&";
         }
 
-        out += "${Uri.encodeComponent(key)}=${Uri.encodeComponent(payload[key].toString())}";
+        out +=
+            "${Uri.encodeComponent(key)}=${Uri.encodeComponent(payload[key].toString())}";
       }
       payload = out;
     }
@@ -133,15 +128,10 @@ class DialScreen {
     return false;
   }
 
-  Future<HttpClientResponse> send(
-    String method,
-    String path, {
-      body,
-      Map<String, dynamic>? headers
-  }) async {
-    var request = await UpnpCommon.httpClient.openUrl(
-      method, baseUri.resolve(path)
-    );
+  Future<HttpClientResponse> send(String method, String path,
+      {body, Map<String, dynamic>? headers}) async {
+    var request =
+        await UpnpCommon.httpClient.openUrl(method, baseUri.resolve(path));
 
     if (body is String) {
       request.write(body);
