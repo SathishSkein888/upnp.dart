@@ -1,4 +1,4 @@
-name: skein_upnp
+name: upnp
 version: 3.0.2
 description: Universal Plugin and Play Host/Client
 homepage: https://github.com/SpinlockLabs/upnp.dart

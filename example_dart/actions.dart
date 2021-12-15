@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:skein_upnp/skein_upnp.dart';
+import 'package:upnp/upnp.dart';
 
 main(List<String> args) async {
   var client = new DiscoveredClient.fake(args[0]);

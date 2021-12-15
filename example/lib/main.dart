@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:upnp/skein_upnp.dart' as upnp;
+import 'package:upnp/upnp.dart' as upnp;
 import 'package:upnp/router.dart' as router;
 
 void main() {
