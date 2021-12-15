@@ -244,7 +244,8 @@ class DeviceDiscoverer {
       bool silent: true}) async {
     var results = await discoverDevices(type: type, timeout: timeout);
 
-    var list = <Device>[];
+    //var list = <Device>[];
+    List<Device> list = [];
     for (var result in results) {
       try {
         var device = await result.getRealDevice();
@@ -270,7 +271,7 @@ class DiscoveredDevice {
       {required this.serviceTypes, required this.uuid, required this.location});
 
   Future<Device> getRealDevice() async {
-    HttpClientResponse response;
+    HttpClientResponse? response;
 
     try {
       var request = await UpnpCommon.httpClient
